@@ -435,7 +435,7 @@ class DedotApi<TCustomChain extends string = never> extends PolkadotApi<
         const err = eventResult?.err ?? eventResult?.value;
         if (err?.type) {
           const subErr = err.value;
-          if (subErr) {
+          if (subErr && typeof subErr === "object") {
             return resolveModuleError(chain, subErr as TModuleError);
           }
           return { reason: err.type };
